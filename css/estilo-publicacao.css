@@ -1,0 +1,24 @@
+.campo-texto {
+    border-radius: 4px;
+    height:30px;
+    margin-top:5px;
+    border:1px solid #d3d3d3;"
+    /*font-weight: bolder;*/
+    width:250px;
+}
+
+.botao-formulario {
+    border-radius: 4px;
+    background-color: #005da9;
+    color: #ffffff;
+    border:none;
+    padding:10px;
+    font-weight:bolder;
+    margin-right:7px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+select {
+    border-radius: 4px;
+}

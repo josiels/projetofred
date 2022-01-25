@@ -1,0 +1,39 @@
+<style>
+	*{
+		padding:0 auto;
+		margin:0 auto;
+	}
+	.loading{
+		width:200px;
+		border:2px  solid #606060;
+		color: #464646;
+		background:#DDD;
+		text-align:center;
+	}
+</style>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script>
+$(function(){
+	$("#executar").click(function(){ // quando o usuário clica no link executa o ajax
+	
+		/* criando uma div de carregamento temporário  e inserindo */
+		$("body").append('<div class="loading">carregando...</div>');
+		
+		$.ajax({
+		  url: "logica.php", // url da logica que você irá executar
+		  type:"POST", // metodo de envio dos dados (recomendo POST)
+		  data:{id:24, nome:"Joao", aniversario: "14/10/92"} // aqui recebe um objeto com quantos parametros voce quiser assim você pode enviar dados dinamicamente
+		}).success(function(resultado) { // se tudo ocorrer bem entra aqui
+			$(".loading").fadeOut(300).remove(); //	ocultando div de carregamento quando o ajax carregar e logo após apagando o mesmo
+			$("#resultado").html("Carregado: "+resultado); // inserindo resultado na div 
+		}).error(function(){ // se der erro entra aqui
+			alert("Desculpe, algum erro aconteceu");
+		});	
+	})
+
+});
+
+</script>
+
+<a href="#" id="executar">executar ajax</a>
+<div id="resultado"></div>
