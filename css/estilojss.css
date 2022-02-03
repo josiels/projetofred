@@ -190,6 +190,22 @@ background-color: #d6dbdf !important;
 hr{
   border-color: #cfcdcd;
 }
+
+.evento th{
+  background:#cfcdcd;
+  padding:5px;
+  color:#666666;
+}
+
 .evento table{
   background-color: #cfcdcd;
+  overflow: auto;
+}
+
+.corpo hr{
+  border: 1px solid #f89406;
+}
+
+.borda-teste{
+  border: 1px solid #f89406;
 }

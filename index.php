@@ -11,6 +11,16 @@
         'titulo' => 'nome',
         'id' => 'id'
     );
+
+    $total_reg = 5;
+    if(isset($_GET['pagina'])){
+        $pc = $_GET['pagina'];
+    }else{
+        $pc = "1";
+    }
+    echo $inicio = $pc - 1;
+    echo $inicio = $inicio * $total_reg;
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -30,16 +40,11 @@
     <!-- Custom styles for this template -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
 
-    <!-- Calendario de eventos-->
-    <link href="calendario/css/style.css" rel="stylesheet" type="text/css" />
     <!-- CSS customizado por Josiel Souza -->
     <link href="css/estilojss.css" rel="stylesheet">
-    
-
 </head>
 
 <body>
-
     <div id="wrapper">
 
         <!-- Sidebar -->
@@ -69,36 +74,43 @@
                     <div class="col-md-12">
                         <hr />
                         <a href="#menu-toggle" class="btn btn-warning" id="menu-toggle">Menu</a>
-                        <br /><br />
+                        
                     </div>
                 </div>
                 <!-- Corpo Principal da página-->
-                <div class="row">
+                <div class="row corpo">
+                    
                     <div class="col-md-9 evento">
-                        <table class="table table-striped">
+                    <hr />
+                    <h5 class="titulo-calendario"><strong>Eventos</strong></h5>
+                        <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nome</th>
-                                    <th>Descrição</th>
-                                    <th>Data</th>
-                                    <th>Local</th>
-                                    <th>Inscrição</th>
+                                    <th class="col=md-1">ID</th>
+                                    <th class="col=md-3">Nome</th>
+                                    <th class="col=md-5">Descrição</th>
+                                    <th class="col=md-1 ">Data</th>
+                                    <th class="col=md-1">Local</th>
+                                    <th class="col=md-1">Inscrição</th>
                                 </tr>
                             </thead>
                             <tbody>
                             <?php
                                 $pdo = conectar();
-                                $sql=$pdo->prepare("SELECT * FROM evento ");
+                                $sqlTotal=$pdo->prepare("SELECT * FROM evento");
+                                $sql=$pdo->prepare("SELECT * FROM evento LIMIT ".$inicio.",".$total_reg);
                                 $sql->execute();
+                                $qtd_linhaTotal = $sqlTotal->rowCount();
                                 $qtd_linha = $sql->rowCount();
-                                
+                                $tr = $qtd_linhaTotal;
+                                $tp = $tr / $total_reg;
+
                                 if ($qtd_linha >=1){
                                     $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
                                     foreach($resultado as $saida){
                                         echo"
                                         <tr>
-                                        <th scope='row'>".$saida->id."</th>
+                                        <td>".$saida->id."</td>
                                         <td>".$saida->nome."</td>
                                         <td>".$saida->descricao."</td>
                                         <td>".$saida->data."</td>
@@ -112,7 +124,8 @@
                         </table>
                     </div>
                     <div class="col-md-3">
-                        <h5 class="titulo-calendario"><strong>Eventos</strong></h5>
+                        <hr />
+                        <h5 class="titulo-calendario"><strong>Datas</strong></h5>
                         <div class="calendario">
                             <?php 
                                 $eventos = montaEventos($info);
@@ -125,8 +138,17 @@
                         </div>
                     </div>
                 </div>
-                
-
+                <?php
+                    echo $anterior = $pc -1;
+                    $proximo = $pc +1;
+                    if ($pc>1) {
+                        echo " <a href='?pagina=$anterior'><- Anterior</a> ";
+                    }
+                    echo "|";
+                    if ($pc<$tp) {
+                        echo " <a href='?pagina=$proximo'>Próxima -></a>";
+                    }
+                ?>
                 <!-- Corpo Principal da página-->
             </div>
         </div>
