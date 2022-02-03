@@ -6,11 +6,11 @@ $_SG['validaSempre'] = true;
 $_SG['servidor'] = 'localhost';
 $_SG['usuario'] = 'root';
 $_SG['senha'] = '';
-$_SG['banco'] = 'genesisc_cursos';
+$_SG['banco'] = '';
 $_SG['paginaLogin'] = 'login.php';
 $_SG['tabela'] = 'usuario';
 function conectar(){
-$bdnome = "genesisc_cursos";
+$bdnome = "";
 $user = "root";
 $password = "";
 $endereco = "localhost";
