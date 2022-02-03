@@ -1,8 +1,8 @@
 ﻿<?php
 	function conect(){
-		$bdnome = "genesis_colegio_e_curso";
+		$bdnome = "";
 		$usuario = "root";
-		$password = "pelopes";
+		$password = "";
 		$endereco = "localhost";
 		try{
 			$pdo = new PDO("mysql:host=$endereco;dbname=$bdnome;","$usuario","$password");
