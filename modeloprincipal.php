@@ -69,47 +69,13 @@
                     <div class="col-md-12">
                         <hr />
                         <a href="#menu-toggle" class="btn btn-warning" id="menu-toggle">Menu</a>
-                        <br /><br />
+                        
                     </div>
                 </div>
                 <!-- Corpo Principal da página-->
                 <div class="row">
-                    <div class="col-md-9 evento">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nome</th>
-                                    <th>Descrição</th>
-                                    <th>Data</th>
-                                    <th>Local</th>
-                                    <th>Inscrição</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                                $pdo = conectar();
-                                $sql=$pdo->prepare("SELECT * FROM evento ");
-                                $sql->execute();
-                                $qtd_linha = $sql->rowCount();
-                                
-                                if ($qtd_linha >=1){
-                                    $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
-                                    foreach($resultado as $saida){
-                                        echo"
-                                        <tr>
-                                        <th scope='row'>".$saida->id."</th>
-                                        <td>".$saida->nome."</td>
-                                        <td>".$saida->descricao."</td>
-                                        <td>".$saida->data."</td>
-                                        <td>".$saida->local."</td>
-                                        <td>".$saida->permite_inscricao."</td>
-                                        </tr>";
-                                    }
-                                }
-                            ?>
-                            </tbody>
-                        </table>
+                    <div class="col-md-9">
+                        <h1 class="">Coluna principal</h1>
                     </div>
                     <div class="col-md-3">
                         <h5 class="titulo-calendario"><strong>Eventos</strong></h5>

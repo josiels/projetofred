@@ -1,7 +1,3 @@
-<?php
-    #session_start();
-    #session_destroy();
-?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -19,37 +15,12 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-    <style type="text/css">
-        .titulo-local-h1{
-                color: #666666;
-                font-size: 3em;
-                font-weight: bolder;
-                text-align: center;
-            }
-            .titulo-local-h2{
-                color: #669999;
-                font-size: 30pt;
-                font-family:Brush Script MT,cursive;
-                text-align: center;
-                font-weight:normal;
-            }
-            .ano-local{
-                color: #3d3d29;
-                font-size: 90pt;
-            }
-    </style>
   </head>
   <body class="login-bg">
     </div>
     <div class="page-content container">
         <div class="row">
             <div class="col-md-4 col-md-offset-1" style="text-align: center;font-size: 9pt;">
-                <!--
-                <h1 class="titulo-local-h1">Projeto Ci&ecirc;ncias
-                <strong class="titulo-local-h2">educar para prevenir</strong></h1>
-                <h1 class="ano-local"><?=date('Y')?></h1>
-                <h1 class="titulo-local-h1"><strong class="titulo-local-h2">valorização da vida</strong></h1>
-                -->
                 <figure>
                     <img src="img/logo_rncrono.png" alt="Logo RN CRONO">
                     <figcaption></figcaption>
@@ -60,7 +31,7 @@
                     <div class="box">
                         <div class="content-wrap">
                             <h6>Acesso administrador</h6>
-                            <form id="" name="" action="validalogin.php" method="POST">
+                            <form id="" name="" action="validalogin" method="POST">
                                 <input class="form-control" type="text" autocomplete="off" autofocus name="login" placeholder="Login">
                                 <input class="form-control" type="password" name="senha" placeholder="*****">
                                 <div class="action">

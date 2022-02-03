@@ -1,7 +1,107 @@
+*{margin:0; padding:0;}
+    
+.calendario{
+    /*margin:40px;
+    width:350px;*/
+    background:white;
+    font-size:12px;
+    text-align:center;
+    position:relative;
+}
+
+.calendario table{
+
+}
+
+.titulo-calendario{
+    color: #666666;
+    font-size: 1.8em;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.calendario .mes{
+    display:none;
+}
+.calendario td{
+    padding:6px;
+    color:#666666;
+}
+.calendario td.atual{
+    border-radius: 1.5em;
+    background:#cfcdcd;
+    color:#666666;
+}
+.calendario td.evento{
+    border-radius: 1.5em;
+    background:#ff6503;
+    
+}
+.calendario td a{
+    color:#fff;
+    text-decoration:none;
+    /*display:block;*/
+}
+.calendario .mes_title{
+    font-size:15px;
+}
+.calendario .mes_title td{
+    background:#cfcdcd;
+    padding:5px;
+    padding-bottom:6px;
+    color:#666666;
+}
+
+.calendario #volta, .calendario #vai{
+    padding:0 10px;
+    font-size:16px;
+    text-decoration:none;
+    /*background:linear-gradient(to bottom, #fff, #ccc 130%);*/
+    line-height:28px;
+    margin:3px;
+    position:absolute;
+    color:#ff6503;
+}
+.calendario #volta:hover, .calendario #vai:hover{
+    /*background:linear-gradient(to bottom, #ccc, #fff 130%);*/
+}
+.calendario #volta{
+    left:-1px;
+    top:-1px;
+}
+.calendario #vai{
+    right:-1px;
+    top:-1px;
+}
+.blue, .red{
+    float:left;
+    width:15px;
+    height:15px;
+    margin-right:5px;
+}
+.blue{
+    background:#cfcdcd;
+}
+.red{
+    background:#ff6503;
+}
+.calendario .legends{
+    float:left;
+    width:100%;
+    margin-top:10px;
+    text-align:left;
+}
+
+.calendario .legends .legenda{
+    float:left;
+    width:30%;
+}
 
 
-
-
+.borda-crono{
+  border:1px solid #c67605 !important;
+  background-color: #f00 !important;
+}
 .texto-comum{
     color:#415A55;
     padding:1em 0em 0em 0em;
@@ -19,7 +119,7 @@
     color:#228B22 !important;
 }
 .botao-remove{
-    color:#FF4500 !important;
+    color:#ffffff !important;
 }
 .botao-oculta{
     color:#F4A460 !important;
@@ -27,7 +127,7 @@
 
 .titulo-local-h1{
       color: #666666;
-      font-size: 3em;
+      font-size: 2.5em;
       font-weight: bolder;
       text-align: center;
 }
@@ -85,4 +185,11 @@ background-color: #d6dbdf !important;
 }
 .div-link:hover{
     background-color: #f00 !important;
+}
+
+hr{
+  border-color: #cfcdcd;
+}
+.evento table{
+  background-color: #cfcdcd;
 }

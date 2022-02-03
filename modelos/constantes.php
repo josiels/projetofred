@@ -22,8 +22,14 @@
 
     //Menu
     $menu = '<ul class="sidebar-nav">
-        <li class="sidebar-brand"><a href="index.php">Início</a></li>
-        <li><hr class="linha-comum" /></li>
+        <li class="sidebar-brand">
+        <p>
+        <figure>
+          <img style="display:block !important;margin-left:auto !important;margin-right:auto !important;" src="img/logo_rncrono_mini.png" alt="RN CRONO">
+        </figure></li>
+        </p>
+        <li><br /></li>
+        <li></li>
         <li><a href="criarevento.php">Criar Evento</a></li>
         <li><a href="listareventos.php">Listar Eventos</a></li>
         <li><a href="cadastraratividade.php">Cadastrar Atividade</a></li>
