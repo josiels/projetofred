@@ -4,15 +4,15 @@ $_SG['abreSessao'] = true;
 $_SG['caseSensitive'] = false;
 $_SG['validaSempre'] = true;
 $_SG['servidor'] = 'localhost';
-$_SG['usuario'] = 'genesisc_g4';
-$_SG['senha'] = 'grupog4@ifrn';
-$_SG['banco'] = 'genesisc_cursos';
+$_SG['usuario'] = '';
+$_SG['senha'] = '';
+$_SG['banco'] = '';
 $_SG['paginaLogin'] = 'login.php';
-$_SG['tabela'] = 'usuario';
+$_SG['tabela'] = '';
 function conectar(){
-$bdnome = "genesisc_cursos";
-$user = "genesisc_g4";
-$password = "grupog4@ifrn";
+$bdnome = "";
+$user = "";
+$password = "";
 $endereco = "localhost";
 try{
 $pdo = new PDO("mysql:host=$endereco;dbname=$bdnome;","$user","$password");
