@@ -18,8 +18,12 @@
     }else{
         $pc = "1";
     }
-    echo $inicio = $pc - 1;
-    echo $inicio = $inicio * $total_reg;
+    $inicio = $pc - 1;
+    $inicio = $inicio * $total_reg;
+
+    //ordenação de exibição da tabela
+    $coluna = (isset($_GET['col'])) ? $_GET['col'] : 'id';
+    $ordem = (isset($_GET['ordem'])) ? $_GET['ordem'] : 'ASC';
 
 ?>
 <!DOCTYPE html>
@@ -40,7 +44,11 @@
     <!-- Custom styles for this template -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
 
-    <!-- CSS customizado por Josiel Souza -->
+    <!-- Utilizado para carregar os ícones-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- JS CSS customizado por Josiel Souza -->
+    <script type="text/javascript" src="js/expandirRetrairTxt.js"></script>
     <link href="css/estilojss.css" rel="stylesheet">
 </head>
 
@@ -83,22 +91,33 @@
                     <div class="col-md-9 evento">
                     <hr />
                     <h5 class="titulo-calendario"><strong>Eventos</strong></h5>
-                        <table class="table table-striped table-bordered">
+                        <table class="table tabelaPrincipal table-bordered">
                             <thead>
                                 <tr>
                                     <th class="col=md-1">ID</th>
                                     <th class="col=md-3">Nome</th>
                                     <th class="col=md-5">Descrição</th>
-                                    <th class="col=md-1 ">Data</th>
-                                    <th class="col=md-1">Local</th>
-                                    <th class="col=md-1">Inscrição</th>
+                                    <th class="col=md-1 ">Local</th>
+                                    <th class="col=md-1">
+                                    <?php
+                                        if($ordem == 'ASC'){
+                                            $ordem = 'DESC';
+                                        }else{
+                                            $ordem = 'ASC';
+                                        }
+                                        echo '<a href="index?col=data&ordem='.$ordem.'">Data</a>';
+                                        echo '</th><th class="col=md-1">';
+                                        echo '<a href="index?col=permite_inscricao&ordem='.$ordem.'">Inscrição</a>';
+                                    ?>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                             <?php
                                 $pdo = conectar();
                                 $sqlTotal=$pdo->prepare("SELECT * FROM evento");
-                                $sql=$pdo->prepare("SELECT * FROM evento LIMIT ".$inicio.",".$total_reg);
+                                $sqlTotal->execute();
+                                $sql=$pdo->prepare("SELECT * FROM evento ORDER BY evento.`".$coluna."` ".$ordem." LIMIT ".$inicio.",".$total_reg);
                                 $sql->execute();
                                 $qtd_linhaTotal = $sqlTotal->rowCount();
                                 $qtd_linha = $sql->rowCount();
@@ -107,16 +126,27 @@
 
                                 if ($qtd_linha >=1){
                                     $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
+                                    $textoExpandir = '<span id="pontos"> ... </span> <span id="mais">';
+
                                     foreach($resultado as $saida){
-                                        echo"
-                                        <tr>
-                                        <td>".$saida->id."</td>
-                                        <td>".$saida->nome."</td>
-                                        <td>".$saida->descricao."</td>
-                                        <td>".$saida->data."</td>
-                                        <td>".$saida->local."</td>
-                                        <td>".$saida->permite_inscricao."</td>
-                                        </tr>";
+                                        $id = $saida->id;
+                                        $nome = $saida->nome;
+                                        $data = date('d/m/Y', strtotime($saida->data));
+                                        $local = $saida->local;
+                                        $inscricao = $saida->permite_inscricao;
+                                        
+                                        $descricao = strip_tags($saida->descricao).'</span></p>';
+                                        $descricao = substr_replace($descricao,$textoExpandir,200,0);
+
+                                        echo '<tr><td>'.$id.'</td><td>'.$nome.'</td>';
+                                        echo '<td><p>'.$descricao.'<br /><button onclick="leiaMais()" id="btnLeiaMais"> Leia mais </button></td>';
+                                        
+                                        echo '<td>'.$local.'</td><td>'.$data.'</td>';
+                                        if($inscricao == 1){
+                                            echo '<td><a href="evento?ev='.$id.'">Sim</a></td></tr>';
+                                        }else{
+                                            echo '<td>Não</td></tr>';
+                                        }
                                     }
                                 }
                             ?>
@@ -125,7 +155,7 @@
                     </div>
                     <div class="col-md-3">
                         <hr />
-                        <h5 class="titulo-calendario"><strong>Datas</strong></h5>
+                        <h5 class="titulo-calendario"><strong>Data</strong></h5>
                         <div class="calendario">
                             <?php 
                                 $eventos = montaEventos($info);
@@ -138,17 +168,24 @@
                         </div>
                     </div>
                 </div>
-                <?php
-                    echo $anterior = $pc -1;
-                    $proximo = $pc +1;
-                    if ($pc>1) {
-                        echo " <a href='?pagina=$anterior'><- Anterior</a> ";
-                    }
-                    echo "|";
-                    if ($pc<$tp) {
-                        echo " <a href='?pagina=$proximo'>Próxima -></a>";
-                    }
-                ?>
+                <div class="row">
+                    <div class="col-md-12 paginador">
+                        <hr />
+                        <?php
+                            $anterior = $pc -1;
+                            $proximo = $pc +1;
+
+                            if ($pc>1) {
+                                echo '<a href="?pagina='.$anterior.'&col='.$coluna.'&ordem='.$ordem.'"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span> Anterior</a> ';
+                            }
+                            echo " | ";
+                            if ($pc<$tp) {
+                                echo '<a href="?pagina='.$proximo.'&col='.$coluna.'&ordem='.$ordem.'">Próxima <span class="glyphicon glyphicon-forward" aria-hidden="true"></span></a>';
+                            }
+                        ?>
+                        <br /><br /><br /><br /><br />
+                    </div>
+                </div>
                 <!-- Corpo Principal da página-->
             </div>
         </div>

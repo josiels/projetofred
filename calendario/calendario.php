@@ -111,7 +111,7 @@
                     $date = date('Y').'-'.$month.'-'.$dayNow;
                     if(in_array($date, array_keys($eventos))){
                         $evento = $eventos[$date];
-                        echo '<td class="evento"><a href="evento.php?ev='.$evento['id'].'" title="'.$evento['titulo'].'">'.$numero.'</a></td>';
+                        echo '<td class="evento"><a href="evento?ev='.$evento['id'].'" title="'.$evento['titulo'].'">'.$numero.'</a></td>';
                     }else{
                         echo '<td class="dia_'.$numero.'">'.$numero.'</td>';
                     }

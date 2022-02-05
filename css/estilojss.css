@@ -125,6 +125,10 @@
     color:#F4A460 !important;
 }
 
+.tabelaPrincipal td{
+  background-color: #ffffff;
+}
+
 .titulo-local-h1{
       color: #666666;
       font-size: 2.5em;
@@ -206,6 +210,23 @@ hr{
   border: 1px solid #f89406;
 }
 
+.paginador{
+  text-align: center;
+}
+.paginador hr{
+  border: 1px solid #f89406;
+}
+
+
+
+
 .borda-teste{
   border: 1px solid #f89406;
+}
+
+
+/*Funções de texto - leia mais e leia menos*/
+
+#mais{
+  display: none !important;
 }

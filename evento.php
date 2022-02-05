@@ -5,6 +5,12 @@
     
     protegePagina();
     
+    if(!isset($_GET['ev'])){
+        header("Location: index");
+    }else{
+        $evento = $_GET['ev'];
+    }
+
     $info = array(
         'tabela' => 'evento',
         'data' => 'data',
@@ -77,8 +83,9 @@
                     
                     <div class="col-md-9 evento">
                     <hr />
-                    <h5 class="titulo-calendario"><strong>Nome da página</strong></h5>
-                        <!-- CONTEÚDO DO CORPO DA PÁGINA-->
+                    <h5 class="titulo-calendario"><strong>Evento</strong></h5>
+
+                    
                     </div>
                     <div class="col-md-3">
                         <hr />
