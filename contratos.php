@@ -5,15 +5,13 @@
     
     protegePagina();
     
-    $evento = (isset($_GET['ev'])) ? $_GET['ev'] : header("Location:pagenotfound");
-
     $info = array(
         'tabela' => 'evento',
         'data' => 'data',
         'titulo' => 'nome',
         'id' => 'id'
     );
-    
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -76,23 +74,24 @@
                 </div>
                 <!-- Corpo Principal da página-->
                 <div class="row corpo">
+                    
                     <div class="col-md-9 evento">
                     <hr />
-                    <h5 class="titulo-calendario"><strong>Evento</strong></h5>
+                    <h5 class="titulo-calendario"><strong>Contratos</strong></h5>
                     <table class="table tabelaPrincipal table-striped table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
-                                <th class="col=md-3">Nome</th>
-                                <th class="col=md-5">Descrição</th>
-                                <th class="col=md-3">Local</th>
+                                <th class="col=md-4">Nome</th>
+                                <th class="col=md-4">Evento</th>
                                 <th class="col=md-1">Data</th>
+                                <th class="col=md-1">Situação</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
 
                                 $pdo = conectar();
-                                $sql=$pdo->prepare("SELECT * FROM evento WHERE evento.id LIKE ".$evento);
+                                $sql=$pdo->prepare("SELECT * FROM contrato INNER JOIN cliente,situacao_contrato,evento WHERE contrato.fk_cliente LIKE cliente.id_cliente AND contrato.fk_situacao_contrato LIKE situacao_contrato.id AND evento.id LIKE contrato.fk_evento ");
                                 $sql->execute();
                                 $qtd_linha = $sql->rowCount();
                                 
@@ -100,17 +99,17 @@
                                     $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
                                     
                                     foreach($resultado as $saida){
-                                        $id = $saida->id;
-                                        $nome = $saida->nome;
-                                        $data = date('d/m/Y', strtotime($saida->data));
-                                        $local = $saida->local;
-                                        $descricao = strip_tags($saida->descricao);
+                                        $id = $saida->id_cliente;
+                                        $nome = $saida->nome_cliente;
+                                        $evento = $saida->nome;
+                                        $data = date("d/m/Y", strtotime($saida->data));
+                                        $situacao = $saida->nome_situacao;
                                     
                                         echo '<tr>
                                                 <td>'.$nome.'</td>
-                                                <td>'.$descricao.'</td>
-                                                <td>'.$local.'</td>
+                                                <td>'.$evento.'</td>
                                                 <td>'.$data.'</td>
+                                                <td>'.$situacao.'</td>
                                             </tr>';
                                     }
                                 }else{
@@ -134,13 +133,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row corpo">
-                        <div class="col-md-12 evento">
-                            <hr />
-                            ABC...
-                        </div>
-                    </div>
-                    
                 </div>
                 <!-- Corpo Principal da página-->
             </div>

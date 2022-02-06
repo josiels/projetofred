@@ -23,7 +23,7 @@
 
     //ordenação de exibição da tabela
     $coluna = (isset($_GET['col'])) ? $_GET['col'] : 'id';
-    $ordem = (isset($_GET['ordem'])) ? $_GET['ordem'] : 'ASC';
+    $ordem = (isset($_GET['ordem'])) ? $_GET['ordem'] : 'DESC';
 
 ?>
 <!DOCTYPE html>
@@ -91,7 +91,7 @@
                     <div class="col-md-9 evento">
                     <hr />
                     <h5 class="titulo-calendario"><strong>Eventos</strong></h5>
-                        <table class="table tabelaPrincipal table-bordered">
+                        <table class="table tabelaPrincipal table-striped table-bordered table-condensed table-hover">
                             <thead>
                                 <tr>
                                     <th class="col=md-1">ID</th>

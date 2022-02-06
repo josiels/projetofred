@@ -5,15 +5,13 @@
     
     protegePagina();
     
-    $evento = (isset($_GET['ev'])) ? $_GET['ev'] : header("Location:pagenotfound");
-
     $info = array(
         'tabela' => 'evento',
         'data' => 'data',
         'titulo' => 'nome',
         'id' => 'id'
     );
-    
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -76,23 +74,25 @@
                 </div>
                 <!-- Corpo Principal da página-->
                 <div class="row corpo">
+                    
                     <div class="col-md-9 evento">
                     <hr />
-                    <h5 class="titulo-calendario"><strong>Evento</strong></h5>
+                    <h5 class="titulo-calendario"><strong>Clientes</strong></h5>
                     <table class="table tabelaPrincipal table-striped table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
-                                <th class="col=md-3">Nome</th>
-                                <th class="col=md-5">Descrição</th>
-                                <th class="col=md-3">Local</th>
-                                <th class="col=md-1">Data</th>
+                                <th class="col=md-4">Nome</th>
+                                <th class="col=md-4">Email</th>
+                                <th class="col=md-1">Contato</th>
+                                <th class="col=md-1">CPF</th>
+                                <th class="col=md-2">Contrato</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
 
                                 $pdo = conectar();
-                                $sql=$pdo->prepare("SELECT * FROM evento WHERE evento.id LIKE ".$evento);
+                                $sql=$pdo->prepare("SELECT * FROM cliente INNER JOIN contrato,situacao_contrato WHERE cliente.id_cliente LIKE contrato.fk_cliente AND contrato.fk_situacao_contrato LIKE situacao_contrato.id ORDER BY cliente.`nome_cliente` ASC ");
                                 $sql->execute();
                                 $qtd_linha = $sql->rowCount();
                                 
@@ -100,17 +100,19 @@
                                     $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
                                     
                                     foreach($resultado as $saida){
-                                        $id = $saida->id;
-                                        $nome = $saida->nome;
-                                        $data = date('d/m/Y', strtotime($saida->data));
-                                        $local = $saida->local;
-                                        $descricao = strip_tags($saida->descricao);
-                                    
+                                        $id = $saida->id_cliente;
+                                        $nome = $saida->nome_cliente;
+                                        $email = $saida->email_cliente;
+                                        $contato = $saida->contato_cliente;
+                                        $cpf = $saida->cpf_cliente;
+                                        $contrato = $saida->nome_situacao;
+
                                         echo '<tr>
                                                 <td>'.$nome.'</td>
-                                                <td>'.$descricao.'</td>
-                                                <td>'.$local.'</td>
-                                                <td>'.$data.'</td>
+                                                <td>'.$email.'</td>
+                                                <td>'.$contato.'</td>
+                                                <td>'.$cpf.'</td>
+                                                <td>'.$contrato.' (<a href="">ver contrato</a>)</td>
                                             </tr>';
                                     }
                                 }else{
@@ -134,13 +136,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row corpo">
-                        <div class="col-md-12 evento">
-                            <hr />
-                            ABC...
-                        </div>
-                    </div>
-                    
                 </div>
                 <!-- Corpo Principal da página-->
             </div>

@@ -30,16 +30,12 @@
         </p>
         <li><br /></li>
         <li></li>
-        <li><a href="criarevento.php">Criar Evento</a></li>
-        <li><a href="listareventos.php">Listar Eventos</a></li>
-        <li><a href="cadastraratividade.php">Cadastrar Atividade</a></li>
+        <li><a href="index">Início</a></li>
+        <li><a href="cadastrarcliente">Cadastrar Cliente</a></li>
+        <li><a href="buscarcliente">Buscar Clientes</a></li>
+        <li><a href="clientes">Clientes</a></li>
         <li><hr class="linha-comum" /></li>
-        <li><a href="buscaraluno.php">Buscar Aluno</a></li>
-        <li><a href="buscarcurso.php">Buscar Curso</a></li>
-        <li><a href="listarnaoinscritos.php">Listar n&atilde;o inscritos</a></li>
-        <li><hr class="linha-comum" /></li>
-        <li><a href="cadastraraluno.php">Cadastrar Novo Aluno</a></li>
-        <li><a href="cadastrarturma.php">Cadastrar Nova Turma</a></li>
+        <li><a href="contratos">Contratos</a></li>
         <li><hr class="linha-comum" /></li>
         <li><a href="logout.php">Sair</a></li>
         </ul>';

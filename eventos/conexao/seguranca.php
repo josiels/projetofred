@@ -4,14 +4,14 @@ $_SG['abreSessao'] = true;
 $_SG['caseSensitive'] = false;
 $_SG['validaSempre'] = true;
 $_SG['servidor'] = 'localhost';
-$_SG['usuario'] = '';
+$_SG['usuario'] = 'root';
 $_SG['senha'] = '';
-$_SG['banco'] = '';
+$_SG['banco'] = 'genesisc_cursos';
 $_SG['paginaLogin'] = 'login.php';
-$_SG['tabela'] = '';
+$_SG['tabela'] = 'usuario';
 function conectar(){
-$bdnome = "";
-$user = "";
+$bdnome = "genesisc_cursos";
+$user = "root";
 $password = "";
 $endereco = "localhost";
 try{
