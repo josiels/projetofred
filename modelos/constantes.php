@@ -31,7 +31,7 @@
         <li><br /></li>
         <li></li>
         <li><a href="index">Início</a></li>
-        <li><a href="cadastrarcliente">Cadastrar Cliente</a></li>
+        <li><a href="cadastrarcliente">Novo Cliente</a></li>
         <li><a href="buscarcliente">Buscar Clientes</a></li>
         <li><a href="clientes">Clientes</a></li>
         <li><hr class="linha-comum" /></li>

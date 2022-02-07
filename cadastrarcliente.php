@@ -5,15 +5,13 @@
     
     protegePagina();
     
-    $evento = (isset($_GET['ev'])) ? $_GET['ev'] : header("Location:pagenotfound");
-
     $info = array(
         'tabela' => 'evento',
         'data' => 'data',
         'titulo' => 'nome',
         'id' => 'id'
     );
-    
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -37,6 +35,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- JS CSS customizado por Josiel Souza -->
+    <script type="text/javascript" src="js/funcBuscaInterativa.js"></script>
+    <script type="text/javascript" src="js/mascaras.js"></script>
+    <script type='text/javascript' src='//code.jquery.com/jquery-compat-git.js'></script>
+    <script type='text/javascript' src='//igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js'></script>
     <script type="text/javascript" src="js/expandirRetrairTxt.js"></script>
     <link href="css/estilojss.css" rel="stylesheet">
 </head>
@@ -77,48 +79,40 @@
                 <!-- Corpo Principal da página-->
                 <div class="row corpo">
                     <div class="col-md-9 evento">
-                    <hr />
-                    <h5 class="titulo-calendario"><strong>Evento</strong></h5>
-                    <table class="table tabelaPrincipal table-striped table-bordered table-condensed table-hover">
-                        <thead>
-                            <tr>
-                                <th class="col=md-3">Nome</th>
-                                <th class="col=md-5">Descrição</th>
-                                <th class="col=md-3">Local</th>
-                                <th class="col=md-1">Data</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
+                        <hr />
+                        <h5 class="titulo-calendario"><strong>Cliente</strong></h5>
+                        <!-- Busca interativa-->
+                        <div class="form-group col-md-12">
+                            <br />
+                            <form name="criarevento" action="validacliente.php" method="post">
+                            <div class="form-group col-md-6">
+                                <label for="nome">Nome</label>
+                                <input type="text" name="nome" class="form-control" id="nome" autocomplete="off" placeholder="Nome completo..." required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="nome">Email</label>
+                                <input type="text" name="email" class="form-control" id="email" autocomplete="off" placeholder="email..." required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="nome">CPF</label>
+                                <input type="text" name="cpf" class="form-control" id="cpf" autocomplete="off" onkeyup="cpfCheck(this)" maxlength="14" onkeydown="javascript: fMasc( this, mCPF );" required><span id="cpfResponse"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="nome">Contato</label>
+                                <input type="text" name="telefone" class="form-control" id="telefone" autocomplete="off" maxlength="15" required>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <button type="reset" class="btn btn-default">Limpar</button>
+                                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                <hr />
+                            </div>
+                            </form>                            
+                            <input type="text" id="busca" class="form-control" onkeyup="buscarNoticias(this.value)" placeholder="Nome ou CPF..." autocomplete="off" autofocus="true" />
+                            <div id="resultado"></div>
+                            <br /><br />
+                            <div id="conteudo"></div>
+                        </div>
 
-                                $pdo = conectar();
-                                $sql=$pdo->prepare("SELECT * FROM evento WHERE evento.id LIKE ".$evento);
-                                $sql->execute();
-                                $qtd_linha = $sql->rowCount();
-                                
-                                if ($qtd_linha >=1){
-                                    $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
-                                    
-                                    foreach($resultado as $saida){
-                                        $id = $saida->id;
-                                        $nome = $saida->nome;
-                                        $data = date('d/m/Y', strtotime($saida->data));
-                                        $local = $saida->local;
-                                        $descricao = strip_tags($saida->descricao);
-                                    
-                                        echo '<tr>
-                                                <td>'.$nome.'</td>
-                                                <td>'.$descricao.'</td>
-                                                <td>'.$local.'</td>
-                                                <td>'.$data.'</td>
-                                            </tr>';
-                                    }
-                                }else{
-                                    header("Location:pagenotfound");
-                                }
-                            ?>
-                        </tbody>
-                    </table>
                     </div>
                     <div class="col-md-3">
                         <hr />
@@ -134,14 +128,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row corpo">
-                        <div class="col-md-12 evento">
-                            <hr />
-                            <h5 class="titulo-calendario"><strong>Contrato</strong></h5>
-                            <p>Texto ...</p>
-                        </div>
-                    </div>
-                    
                 </div>
                 <!-- Corpo Principal da página-->
             </div>
