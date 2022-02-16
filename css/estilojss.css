@@ -9,9 +9,9 @@
     position:relative;
 }
 
-.calendario table{
+/*.calendario table{
 
-}
+}*/
 
 .titulo-calendario{
     color: #666666;
@@ -62,9 +62,9 @@
     position:absolute;
     color:#ff6503;
 }
-.calendario #volta:hover, .calendario #vai:hover{
-    /*background:linear-gradient(to bottom, #ccc, #fff 130%);*/
-}
+/*.calendario #volta:hover, .calendario #vai:hover{
+    background:linear-gradient(to bottom, #ccc, #fff 130%);
+}*/
 .calendario #volta{
     left:-1px;
     top:-1px;
@@ -199,6 +199,7 @@ hr{
   background:#cfcdcd;
   padding:5px;
   color:#666666;
+  text-align: center;
 }
 
 .evento table{

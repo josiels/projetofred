@@ -4,14 +4,6 @@
     require_once("calendario/calendario.php");
     
     protegePagina();
-    
-    $info = array(
-        'tabela' => 'evento',
-        'data' => 'data',
-        'titulo' => 'nome',
-        'id' => 'id'
-    );
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -126,14 +118,7 @@
                         <hr />
                         <h5 class="titulo-calendario"><strong>Data</strong></h5>
                         <div class="calendario">
-                            <?php 
-                                $eventos = montaEventos($info);
-                                montaCalendario($eventos);
-                            ?>
-                            <div class="legends">
-                                <span class="legenda"><span class="red"></span> Eventos</span>
-                                <span class="legenda"><span class="blue"></span> Hoje</span>
-                            </div>
+                            <?=montaCalendario()?>
                         </div>
                     </div>
                 </div>

@@ -5,15 +5,7 @@
     
     protegePagina();
     
-    $evento = (isset($_GET['ev'])) ? $_GET['ev'] : header("Location:pagenotfound");
-
-    $info = array(
-        'tabela' => 'evento',
-        'data' => 'data',
-        'titulo' => 'nome',
-        'id' => 'id'
-    );
-    
+    $evento = (isset($_GET['ev'])) ? $_GET['ev'] : header("Location:pagenotfound");   
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -124,14 +116,7 @@
                         <hr />
                         <h5 class="titulo-calendario"><strong>Data</strong></h5>
                         <div class="calendario">
-                            <?php 
-                                $eventos = montaEventos($info);
-                                montaCalendario($eventos);
-                            ?>
-                            <div class="legends">
-                                <span class="legenda"><span class="red"></span> Eventos</span>
-                                <span class="legenda"><span class="blue"></span> Hoje</span>
-                            </div>
+                            <?=montaCalendario()?>
                         </div>
                     </div>
                     <div class="row corpo">

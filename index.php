@@ -4,13 +4,6 @@
     require_once("calendario/calendario.php");
     
     protegePagina();
-    
-    $info = array(
-        'tabela' => 'evento',
-        'data' => 'data',
-        'titulo' => 'nome',
-        'id' => 'id'
-    );
 
     $total_reg = 5;
     if(isset($_GET['pagina'])){
@@ -94,11 +87,11 @@
                         <table class="table tabelaPrincipal table-striped table-bordered table-condensed table-hover">
                             <thead>
                                 <tr>
-                                    <th class="col=md-1">ID</th>
-                                    <th class="col=md-3">Nome</th>
-                                    <th class="col=md-5">Descrição</th>
-                                    <th class="col=md-1 ">Local</th>
-                                    <th class="col=md-1">
+                                    <th class="col-md-1">ID</th>
+                                    <th class="col-md-3">Nome</th>
+                                    <th class="col-md-5">Descrição</th>
+                                    <th class="col-md-2 ">Local</th>
+                                    <th class="col-md-1">
                                     <?php
                                         if($ordem == 'ASC'){
                                             $ordem = 'DESC';
@@ -107,11 +100,11 @@
                                         }
                                         echo '<a href="index?col=data&ordem='.$ordem.'">Data</a>';
                                         echo '</th><th class="col=md-1">';
-                                        echo '<a href="index?col=permite_inscricao&ordem='.$ordem.'">Inscrição</a>';
+                                        echo '<a href="index?col=permite_inscricao&ordem='.$ordem.'">Orçamento</a>';
                                     ?>
                                     </th>
                                 </tr>
-                            </thead>
+                            </thead>    
                             <tbody>
                             <?php
                                 $pdo = conectar();
@@ -126,8 +119,7 @@
 
                                 if ($qtd_linha >=1){
                                     $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
-                                    $textoExpandir = '<span id="pontos"> ... </span> <span id="mais">';
-
+                                    
                                     foreach($resultado as $saida){
                                         $id = $saida->id;
                                         $nome = $saida->nome;
@@ -135,17 +127,20 @@
                                         $local = $saida->local;
                                         $inscricao = $saida->permite_inscricao;
                                         
-                                        $descricao = strip_tags($saida->descricao).'</span></p>';
-                                        $descricao = substr_replace($descricao,$textoExpandir,200,0);
-
-                                        echo '<tr><td>'.$id.'</td><td>'.$nome.'</td>';
-                                        echo '<td><p>'.$descricao.'<br /><button onclick="leiaMais()" id="btnLeiaMais"> Leia mais </button></td>';
+                                        $descricao = strip_tags($saida->descricao);
                                         
+                                        echo '<tr><td>'.$id.'</td><td>'.$nome.'</td>';
+                                        
+                                        echo '<td><a class="" data-toggle="collapse" href="#'.$id.'collapse" role="button" aria-expanded="false" aria-controls="'.$id.'collapse">
+                                            Ver descrição...</a><div class="collapse" id="'.$id.'collapse">
+                                            <div class="card card-body">'.$descricao.'</div>
+                                            </div></td>';
+
                                         echo '<td>'.$local.'</td><td>'.$data.'</td>';
                                         if($inscricao == 1){
-                                            echo '<td><a href="evento?ev='.$id.'">Sim</a></td></tr>';
+                                            echo '<td><a href="evento?ev='.$id.'">Fazer</a></td></tr>';
                                         }else{
-                                            echo '<td>Não</td></tr>';
+                                            echo '<td>Feito</td></tr>';
                                         }
                                     }
                                 }
@@ -157,14 +152,7 @@
                         <hr />
                         <h5 class="titulo-calendario"><strong>Data</strong></h5>
                         <div class="calendario">
-                            <?php 
-                                $eventos = montaEventos($info);
-                                montaCalendario($eventos);
-                            ?>
-                            <div class="legends">
-                                <span class="legenda"><span class="red"></span> Eventos</span>
-                                <span class="legenda"><span class="blue"></span> Hoje</span>
-                            </div>
+                            <?=montaCalendario()?>
                         </div>
                     </div>
                 </div>

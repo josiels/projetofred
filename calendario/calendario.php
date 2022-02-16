@@ -1,17 +1,25 @@
 <?php
+
+    $_CAL['tabela'] = 'evento';
+    $_CAL['data'] = 'data';
+    $_CAL['titulo'] = 'nome';
+    $_CAL['id'] = 'id';
+
     function num($num){
         return ($num < 10) ? '0'.$num : $num;
     }
 
-    function montaEventos($info){
+    function montaEventos(){
+        global $_CAL;
         $pdo = conectar();
         //tabela, data, titulo
-        $tabela = $info['tabela'];
-        $data = $info['data'];
-        $titulo = $info['titulo'];
-        $id = $info['id'];
+        $tabela = $_CAL['tabela'];
+        $data = $_CAL['data'];
+        $titulo = $_CAL['titulo'];
+        $id = $_CAL['id'];
 
-        $eventos = $pdo->prepare("SELECT * FROM evento WHERE `data` >= NOW()");
+        $eventos = $pdo->prepare("SELECT * FROM evento");
+        #$eventos = $pdo->prepare("SELECT * FROM evento WHERE `data` >= NOW()");
         //$eventos = $pdo->prepare("SELECT * FROM `".$tabela."` WHERE `".$data."` >= NOW()");
         $eventos->execute();
 
@@ -37,7 +45,8 @@
         return $retorno;
     }
 
-    function montaCalendario($eventos = array()){
+    function montaCalendario(){
+        $eventos = montaEventos();
         $daysWeek = array(
             'Sun',
             'Mon',
@@ -126,5 +135,8 @@
             echo '</tr></tbody>';
         }
         echo '</table>';
+        echo '<div class="legends">
+              <span class="legenda"><span class="red"></span> Eventos</span>
+              <span class="legenda"><span class="blue"></span> Hoje</span></div>';
     }
 ?>
