@@ -69,9 +69,9 @@
                 <!-- Corpo Principal da página-->
                 <div class="row corpo">
                     <div class="col-md-9 evento">
-                    <hr />
-                    <h5 class="titulo-calendario"><strong>Evento</strong></h5>
-                    <table class="table tabelaPrincipal table-striped table-bordered table-condensed table-hover">
+                        <hr />
+                        <h5 class="titulo-calendario"><strong>Evento</strong></h5>
+                        <table class="table tabelaPrincipal table-striped table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
                                 <th class="col=md-3">Nome</th>
@@ -110,7 +110,14 @@
                                 }
                             ?>
                         </tbody>
-                    </table>
+                        </table>
+                        <div class="row corpo">
+                        <div class="col-md-12 evento">
+                            <hr />
+                            <h5 class="titulo-calendario"><strong>Orçamento</strong></h5>
+                            <p>Texto ...</p>
+                        </div>
+                    </div>
                     </div>
                     <div class="col-md-3">
                         <hr />
@@ -119,14 +126,6 @@
                             <?=montaCalendario()?>
                         </div>
                     </div>
-                    <div class="row corpo">
-                        <div class="col-md-12 evento">
-                            <hr />
-                            <h5 class="titulo-calendario"><strong>Contrato</strong></h5>
-                            <p>Texto ...</p>
-                        </div>
-                    </div>
-                    
                 </div>
                 <!-- Corpo Principal da página-->
             </div>
@@ -154,3 +153,4 @@
 </body>
 
 </html>
+

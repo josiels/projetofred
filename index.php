@@ -129,7 +129,7 @@
                                         
                                         $descricao = strip_tags($saida->descricao);
                                         
-                                        echo '<tr><td>'.$id.'</td><td>'.$nome.'</td>';
+                                        echo '<tr><td>'.$id.'</td><td><a href="evento?ev='.$id.'">'.$nome.'</a></td>';
                                         
                                         echo '<td><a class="" data-toggle="collapse" href="#'.$id.'collapse" role="button" aria-expanded="false" aria-controls="'.$id.'collapse">
                                             Ver descrição...</a><div class="collapse" id="'.$id.'collapse">
@@ -138,9 +138,9 @@
 
                                         echo '<td>'.$local.'</td><td>'.$data.'</td>';
                                         if($inscricao == 1){
-                                            echo '<td><a href="evento?ev='.$id.'">Fazer</a></td></tr>';
+                                            echo '<td><a href="evento?ev='.$id.'">Pendente</a></td></tr>';
                                         }else{
-                                            echo '<td>Feito</td></tr>';
+                                            echo '<td>Concluído</td></tr>';
                                         }
                                     }
                                 }
