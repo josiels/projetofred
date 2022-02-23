@@ -88,10 +88,6 @@
                                 $eventos = montaEventos($info);
                                 montaCalendario($eventos);
                             ?>
-                            <div class="legends">
-                                <span class="legenda"><span class="red"></span> Eventos</span>
-                                <span class="legenda"><span class="blue"></span> Hoje</span>
-                            </div>
                         </div>
                     </div>
                 </div>
