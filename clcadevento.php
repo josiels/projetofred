@@ -1,17 +1,6 @@
 <?php
     require_once("conexao/seguranca.php");
     require_once('modelos/constantes.php');
-    require_once("calendario/calendario.php");
-    
-    protegePagina();
-    
-    $info = array(
-        'tabela' => 'evento',
-        'data' => 'data',
-        'titulo' => 'nome',
-        'id' => 'id'
-    );
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -37,6 +26,13 @@
     <!-- JS CSS customizado por Josiel Souza -->
     <script type="text/javascript" src="js/expandirRetrairTxt.js"></script>
     <link href="css/estilojss.css" rel="stylesheet">
+    <!-- Limpar campos do formulário-->
+    <script type="text/javascript">
+        $('#f input').each(function(){
+            $(this).val('');
+        });
+        document.cadEvento.reset();
+    </script>
 </head>
 
 <body>
@@ -65,31 +61,32 @@
                 </div>
                 <!-- Corpo Principal da página-->
                 <div class="row">
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-12 formulario">
                         <hr />
                         <!-- CONTEÚDO DO CORPO DA PÁGINA-->
-                        <form name="cdtEvento" id="cdtEvento" action="#" method="POST">
+                        <form name="cadEvento" id="cadEvento" action="valclcadevento" method="POST">
+                                <input type="hidden" name="validador" value="TRUE">    
                         <p>Organizador</p>
                         <div class="form-group col-md-4">
                                 <label for="nome">Nome</label>
-                                <input type="text" name="nome" class="form-control" id="nome" autocomplete="off" placeholder="Nome completo..." required>
+                                <input type="text" name="nome" class="form-control" id="nome" autocomplete="" placeholder="Nome completo..." required>
                         </div>
                         <div class="form-group col-md-4">
                                 <label for="email">Email</label>
-                                <input type="text" name="" class="form-control" id="" autocomplete="off" placeholder="" required>
+                                <input type="text" name="email" class="form-control" id="" autocomplete="" placeholder="">
                         </div>
                         <div class="form-group col-md-4">
                                 <label for="contato">Contato</label>
-                                <input type="text" name="" class="form-control" id="" autocomplete="off" placeholder="" required>
+                                <input type="text" name="contato" class="form-control" id="" autocomplete="" placeholder="">
                         </div>
                         <p>Evento</p>
                         <div class="form-group col-md-4">
                                 <label for="data">Data</label>
-                                <input type="date" name="data" class="form-control" id="data" required>
+                                <input type="date" name="data" class="form-control" id="data">
                         </div>
                         <div class="form-group col-md-4">
                                 <label for="">Cidade</label>
-                                <input type="text" name="" class="form-control" id="" autocomplete="off" placeholder="" required>
+                                <input type="text" name="" class="form-control" id="" autocomplete="off" placeholder="">
                         </div>
                         <div class="form-group col-md-4">
                                 <label for="">Modalidade</label>
@@ -102,9 +99,12 @@
                                 <textarea name="" class="form-control" id=""></textarea>
                         </div>
                         <p>Acessórios</p>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-12">
                                 <label for="">Quantidade de atletas</label>
                                 <input type="number" min="0" name="" class="form-control" id=""/>
+                        </div>
+                        <div class="form-group col-md-2">
+                                <input type="submit" name="cadastrar"  value="Cadastrar" class="form-control" id="cadastrar"/>
                         </div>
                     </div>
                 </div>
